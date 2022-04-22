@@ -1,21 +1,35 @@
-class Band:
-    def __init__(self, name="unknown", members="unknown"):
+
+
+class Band():
+    instances = []
+    def __init__(self, name, members):
+
         self.name = name
         self.members = members
+        Band.instances.append(self)
+    def play_solos(self):
+        solo_list = []
+        for member in self.members:
+            solo_list.append(member.play_solo())
+        return solo_list
+    
+    @classmethod
+    def to_list(cls):
+       return cls.instances
+
+    def __repr__(self):
+        pass
+
+    def __str__(self):
+        return self.name
 
 
 class Musician:
     def __init__(self, name="unknown"):
         self.name = name
 
-    def get_instrument(self):
-        return "guitar"
-
 
 class Guitarist(Musician):
-    def __init__(self, name="unknown"):
-        self.name = name
-
     def __repr__(self):
         return f"Guitarist instance. Name = {self.name}"
 
@@ -25,11 +39,11 @@ class Guitarist(Musician):
     def get_instrument(self):
         return "guitar"
 
+    def play_solo(self):
+        return "face melting guitar solo"
+
 
 class Bassist(Musician):
-    def __init__(self, name="unknown"):
-        self.name = name
-
     def __str__(self):
         return f"My name is {self.name} and I play bass"
 
@@ -39,11 +53,11 @@ class Bassist(Musician):
     def get_instrument(self):
         return "bass"
 
+    def play_solo(self):
+        return "bom bom buh bom"
+
 
 class Drummer(Musician):
-    def __init__(self, name="unknown"):
-        self.name = name
-
     def __str__(self, name="unknown"):
         return f"My name is {self.name} and I play drums"
 
@@ -52,6 +66,9 @@ class Drummer(Musician):
 
     def get_instrument(self):
         return "drums"
+
+    def play_solo(self):
+        return "rattle boom crash"
 
 
 nirvana = Band("Nirvana", [])
